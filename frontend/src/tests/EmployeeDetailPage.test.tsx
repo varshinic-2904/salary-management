@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { renderWithRoute, screen, waitFor, userEvent } from './test-utils';
-import { EmployeeDetailPage } from '@/pages/EmployeeDetailPage';
+import { EmployeeDetailPage, EmployeeEditPage } from '@/pages/EmployeeDetailPage';
 import { api } from '@/lib/api';
 import { mockEmployee } from './fixtures';
 
@@ -102,5 +102,27 @@ describe('EmployeeDetailPage', () => {
       expect(mockedApi.deleteEmployee).toHaveBeenCalledWith('emp-1');
       expect(mockNavigate).toHaveBeenCalledWith('/employees');
     });
+  });
+});
+
+describe('EmployeeEditPage', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockedApi.getEmployee.mockResolvedValue(mockEmployee);
+  });
+
+  it('navigates to employee detail when Cancel is clicked', async () => {
+    const user = userEvent.setup();
+    renderWithRoute('/employees/:id/edit', <EmployeeEditPage />, {
+      route: '/employees/emp-1/edit',
+    });
+
+    await waitFor(() => {
+      expect(screen.getByText('Edit Employee')).toBeInTheDocument();
+    });
+
+    await user.click(screen.getByRole('button', { name: /cancel/i }));
+
+    expect(mockNavigate).toHaveBeenCalledWith('/employees/emp-1');
   });
 });
