@@ -214,6 +214,7 @@ export function EmployeeEditPage() {
           hireDate: employee.hireDate.split('T')[0],
         }}
         onSubmit={(data) => mutation.mutate(data)}
+        onCancel={() => navigate(`/employees/${id}`)}
         isLoading={mutation.isPending}
         submitLabel="Save Changes"
       />
