@@ -1,13 +1,17 @@
 {
   "name": "salary-management",
   "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
   "scripts": {
-    "dev:backend": "cd backend && npm run dev",
-    "dev:frontend": "cd frontend && npm run dev",
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "test": "cd backend && npm test && cd ../frontend && npm test",
-    "db:seed": "cd backend && npm run db:seed",
-    "db:migrate": "cd backend && npm run db:migrate"
+    "dev:backend": "yarn workspace salary-management-backend dev",
+    "dev:frontend": "yarn workspace frontend dev",
+    "dev": "concurrently \"yarn dev:backend\" \"yarn dev:frontend\"",
+    "test": "yarn workspace salary-management-backend test && yarn workspace frontend test",
+    "db:seed": "yarn workspace salary-management-backend db:seed",
+    "db:migrate": "yarn workspace salary-management-backend db:migrate"
   },
   "devDependencies": {
     "concurrently": "^9.1.2"
