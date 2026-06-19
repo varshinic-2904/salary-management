@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -108,7 +108,7 @@ async function main() {
   await prisma.employee.deleteMany();
 
   const rng = createRng(SEED);
-  const employees = [];
+  const employees: Prisma.EmployeeCreateManyInput[] = [];
 
   for (let i = 1; i <= TOTAL_EMPLOYEES; i++) {
     const country = pick(rng, COUNTRIES);
