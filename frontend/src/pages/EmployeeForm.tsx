@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 interface EmployeeFormProps {
   initial?: Partial<CreateEmployeeInput>;
   onSubmit: (data: CreateEmployeeInput) => void;
+  onCancel?: () => void;
   isLoading?: boolean;
   submitLabel?: string;
 }
@@ -32,6 +33,7 @@ const emptyForm: CreateEmployeeInput = {
 export function EmployeeForm({
   initial,
   onSubmit,
+  onCancel,
   isLoading,
   submitLabel = 'Save',
 }: EmployeeFormProps) {
@@ -153,6 +155,11 @@ export function EmployeeForm({
             />
           </div>
           <div className="md:col-span-2 flex justify-end gap-2 pt-4">
+            {onCancel && (
+              <Button type="button" variant="outline" onClick={onCancel}>
+                Cancel
+              </Button>
+            )}
             <Button type="submit" disabled={isLoading}>
               {isLoading ? 'Saving...' : submitLabel}
             </Button>
@@ -175,6 +182,7 @@ export function EmployeeCreatePage() {
       <h2 className="text-2xl font-bold">Add Employee</h2>
       <EmployeeForm
         onSubmit={(data) => mutation.mutate(data)}
+        onCancel={() => navigate('/employees')}
         isLoading={mutation.isPending}
         submitLabel="Create Employee"
       />
