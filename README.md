@@ -67,7 +67,7 @@ yarn dev
 
 ```bash
 # From project root
-yarn test   # 18 API tests + 8 UI tests
+yarn test   # 18 API tests + 37 UI tests
 ```
 
 ## API Endpoints
