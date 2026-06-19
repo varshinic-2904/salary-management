@@ -31,34 +31,43 @@ Employee salary management software for ACME's HR team. Replaces Excel-based wor
 
 ### Prerequisites
 - Node.js 20+
-- npm 10+
+- Yarn 1.22+
 
-### 1. Backend
+### 1. Install dependencies (from repo root)
+
+```bash
+yarn install
+```
+
+### 2. Backend
 
 ```bash
 cd backend
 cp .env.example .env
-npm install
-npx prisma migrate dev
-npm run db:seed    # Seeds 10,000 employees (~10 seconds)
-npm run dev        # http://localhost:3001
+yarn workspace salary-management-backend exec prisma migrate dev
+yarn db:seed    # Seeds 10,000 employees (~10 seconds)
+yarn dev   # http://localhost:3001
 ```
 
-### 2. Frontend
+### 3. Frontend
 
 ```bash
 cd frontend
-cp .env.example .env
-npm install
-npm run dev        # http://localhost:5173
+cp frontend/.env.example frontend/.env
+yarn dev:frontend  # http://localhost:5173
 ```
 
-### 3. Run Tests
+Or run both together:
+
+```bash
+yarn dev
+```
+
+### 4. Run Tests
 
 ```bash
 # From project root
-cd backend && npm test   # 18 API tests
-cd ../frontend && npm test  # 8 UI tests
+yarn test   # 18 API tests + 8 UI tests
 ```
 
 ## API Endpoints
@@ -88,9 +97,9 @@ cd ../frontend && npm test  # 8 UI tests
 ### Backend (Render)
 
 1. Connect this repo to Render
-2. Set root directory to `backend`
-3. Build: `npm install && npx prisma generate && npm run build`
-4. Start: `npx prisma migrate deploy && npm run db:seed && npm start`
+2. Set root directory to repository root (not `backend/`)
+3. Build: `yarn install --frozen-lockfile && yarn workspace salary-management-backend db:generate && yarn workspace salary-management-backend build`
+4. Start: `yarn workspace salary-management-backend exec prisma migrate deploy && yarn workspace salary-management-backend db:seed && yarn workspace salary-management-backend start`
 5. Environment variables:
    - `DATABASE_URL` — Neon connection string
    - `CORS_ORIGIN` — your Vercel frontend URL
@@ -98,10 +107,13 @@ cd ../frontend && npm test  # 8 UI tests
 
 ### Frontend (Vercel)
 
-1. Import repo, set root directory to `frontend`
+1. Import repo, set root directory to repository root
 2. Framework preset: Vite
-3. Environment variable: `VITE_API_URL=https://your-api.onrender.com/api/v1`
-4. Deploy — `vercel.json` handles SPA routing
+3. Install command: `yarn install`
+4. Build command: `yarn workspace frontend build`
+5. Output directory: `frontend/dist`
+6. Environment variable: `VITE_API_URL=https://your-api.onrender.com/api/v1`
+7. Deploy — `frontend/vercel.json` handles SPA routing
 
 ## Project Structure
 
@@ -109,6 +121,7 @@ cd ../frontend && npm test  # 8 UI tests
 ├── docs/           # Requirements, architecture, trade-offs, AI prompts
 ├── backend/        # Express API + Prisma + tests
 ├── frontend/       # React SPA + tests
+├── yarn.lock       # Single lockfile for all workspaces
 └── README.md
 ```
 
@@ -127,4 +140,4 @@ Record a 3–5 minute walkthrough covering:
 2. Employee search, filter, and pagination
 3. Salary edit with confirmation
 4. CSV export
-5. Test suite (`npm test`)
+5. Test suite (`yarn test`)
