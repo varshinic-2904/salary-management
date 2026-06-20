@@ -3,12 +3,14 @@ services:
     name: salary-management-api
     runtime: node
     rootDir: .
-    buildCommand: yarn install --frozen-lockfile && yarn workspace salary-management-backend db:generate && yarn workspace salary-management-backend build
+    buildCommand: yarn install --frozen-lockfile --production=false && yarn workspace salary-management-backend db:generate && yarn workspace salary-management-backend build
     startCommand: yarn workspace salary-management-backend exec prisma migrate deploy && yarn workspace salary-management-backend db:seed && yarn workspace salary-management-backend start
     envVars:
       - key: DATABASE_URL
         sync: false
       - key: CORS_ORIGIN
         sync: false
+      - key: YARN_PRODUCTION
+        value: "false"
       - key: NODE_ENV
         value: production
