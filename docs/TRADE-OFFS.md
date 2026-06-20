@@ -5,12 +5,12 @@
 
 **Why:** At 10K rows, joins add complexity without meaningful performance gain. HR queries are always employee-centric. Indexes on filter columns keep queries fast.
 
-**Trade-off:** Department/country values are strings, not foreign keys. Acceptable for this scale; would normalize at 100K+ with reference data management needs.
+**Trade-off:** Department/country values are strings, not foreign keys. Acceptable for this scale; would consider normalization if additional reference data, validation requirements, or increased complexity justified it.
 
 ## No authentication
 **Decision:** Skip auth/RBAC for the assessment.
 
-**Why:** Focus on data management and analytics. Auth is well-understood; implementing it would consume time without demonstrating unique engineering judgment.
+**Why:** Focus on data management and analytics. Authentication and role-based access were intentionally excluded to keep the assessment focused on salary management and compensation analytics.
 
 **Trade-off:** Not production-ready. Documented as first priority for a real deployment.
 
@@ -40,7 +40,7 @@
 
 **Why:** Faster to scaffold, easier to test with Supertest, sufficient for a focused CRUD + analytics API.
 
-**Trade-off:** Less structure for very large teams. Would choose NestJS for a 20+ endpoint enterprise API.
+**Trade-off:** Less structure for very large teams. Express was sufficient for the current scope. For larger systems requiring additional structure and conventions, frameworks such as NestJS could be considered.
 
 ## Vite + React SPA over Next.js
 **Decision:** Client-rendered SPA with React Router.
@@ -48,3 +48,11 @@
 **Why:** Assessment requires ReactJS. No SSR/SSG needed for an internal HR tool. Vite provides fast dev experience.
 
 **Trade-off:** No server-side rendering. Not needed for this use case.
+
+## Layered Architecture
+
+**Decision:** Use routes → services → Prisma separation.
+
+**Why:** Keeps HTTP concerns separate from business logic and improves maintainability and testability.
+
+**Trade-off:** Slightly more files compared to placing logic directly inside route handlers, but easier to scale and test.

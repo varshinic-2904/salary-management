@@ -6,8 +6,8 @@ Employee salary management software for ACME's HR team. Replaces Excel-based wor
 
 | Service | URL |
 |---------|-----|
-| Frontend | _Deploy to Vercel — see instructions below_ |
-| API | _Deploy to Render — see instructions below_ |
+| Frontend | https://salary-management-gamma-five.vercel.app |
+| API | https://salary-management-8p0u.onrender.com/api/v1/employees?limit=1 |
 
 ## Features
 
@@ -135,9 +135,13 @@ yarn test   # 18 API tests + 37 UI tests
 
 ## Video Demo
 
-Record a 3–5 minute walkthrough covering:
+Video demonstration included with submission:
 1. Dashboard compensation insights
 2. Employee search, filter, and pagination
 3. Salary edit with confirmation
 4. CSV export
 5. Test suite (`yarn test`)
+
+## AI Usage
+
+- AI prompts and usage notes are available in: docs/AI-PROMPTS.md

@@ -22,11 +22,11 @@ React SPA (Vercel) ──HTTP──► Express API (Render) ──Prisma──�
 - **Node.js + Express + TypeScript** REST API
 - **Prisma ORM** for type-safe database access and migrations
 - **Zod** for request validation
-- Layered structure: routes → services → Prisma
+- This separation keeps business logic independent from HTTP concerns and improves maintainability and testability.
 
 ### Database
 - **PostgreSQL** (Neon in production, local Postgres or SQLite for dev)
-- Single `Employee` table with indexes on filter/sort columns
+- Single `Employee` table optimized for common search and filter operations.
 - Optimized for paginated reads at 10K row scale
 
 ## Data Flow

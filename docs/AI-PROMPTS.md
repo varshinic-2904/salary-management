@@ -6,13 +6,21 @@ This document records key prompts and instructions used with Cursor AI during th
 
 **Prompt:** Assessment requirements for employee salary management software — 10,000 employees, HR Manager persona, React frontend, Node.js backend, incremental commits, tests, and artifacts.
 
-**AI Output:** Full architecture plan with tech stack decisions (Express + Prisma + React/Vite), data model, API design, commit strategy, and deployment plan.
+**AI Contribution:**
+Used AI to brainstorm possible architecture options and generate an initial implementation plan.
+
+**Human Decision:**
+Selected Express + Prisma + React/Vite based on familiarity, maintainability, and assessment requirements.
 
 ## Stack Decisions
 
 **Prompt:** Use Node.js Express backend and React TypeScript frontend (not Next.js).
 
-**AI Output:** Updated plan to Vite + React Router SPA with Express API on Render and React on Vercel.
+**AI Contribution:**
+Provided alternative frontend and deployment approaches.
+
+**Human Decision:**
+Chose React + Vite and separate deployments for simplicity and faster iteration.
 
 ## Implementation Prompts
 
@@ -39,3 +47,8 @@ This document records key prompts and instructions used with Cursor AI during th
 - Fixed React `verbatimModuleSyntax` type-only import errors
 - Fixed Recharts Tooltip formatter type compatibility
 - Separated test database (`test.db`) from dev database (`dev.db`)
+
+## Overall Approach
+
+- AI was used as an accelerator for repetitive tasks, brainstorming, and code scaffolding.
+- Final responsibility for architecture, business logic, testing, and trade-off decisions remained with the developer.

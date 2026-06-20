@@ -47,8 +47,13 @@ At 10,000 rows, paginated queries with filters complete in **< 50ms** on SQLite/
 - Total test suite: **< 3 seconds**
 
 ## Production Scaling Notes
-At 100K+ employees, consider:
+If future requirements introduce significantly larger datasets or heavier analytics workloads, possible improvements include:
 - Postgres full-text search (tsvector) replacing `contains` filters
 - Materialized views for analytics aggregates
 - Read replicas for dashboard queries
 - Cursor-based pagination replacing offset pagination
+
+## Why No Premature Optimization
+
+- The assessment requires support for 10,000 employees, which is a relatively small dataset for modern relational databases.
+- The implementation prioritizes simplicity and maintainability while leaving clear paths for future optimization if requirements evolve.
